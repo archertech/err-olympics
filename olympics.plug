@@ -1,0 +1,9 @@
+[Core]
+Name = Olympics
+Module = olympics
+
+[Python]
+Version = 3
+
+[Documentation]
+Description = Retrieves information on the Olympics
