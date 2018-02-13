@@ -1,5 +1,4 @@
 
-
 import logging
 import requests
 from bs4 import BeautifulSoup
@@ -10,6 +9,10 @@ class Olympics(BotPlugin):
 
     RESULT_TABLE_CLASS = 'ResTableFull'
     MEDALS_URL = 'https://www.pyeongchang2018.com/en/game-time/results/OWG2018/en/general/medal-standings.htm'
+
+    def activate(self):
+        super(Olympics, self).activate()
+
 
     @botcmd
     def medals(self, msg, args):
@@ -29,11 +32,11 @@ class Olympics(BotPlugin):
            silvers = cells[3].text.strip()
            bronzes = cells[4].text.strip()
 
-           yield f'{rank:3s} | {country:20s} | {golds:3s} | {silvers:3s} | {bronzes:3s}'.format(
-               rank,
-               country,
-               golds,
-               silvers,
-               bronzes)
+           yield '{} | {} | {} | {} | {}'.format(
+               rank.zfill(2),
+               country.ljust(20),
+               golds.rjust(3),
+               silvers.rjust(3),
+               bronzes.rjust(3))
 
         yield 'Source: {}'.format(self.MEDALS_URL)
